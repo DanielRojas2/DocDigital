@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Cerrar sesión{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Sesión Finalizada</h1>
+        <p class="text-center">
+            Saliste de tu cuenta correctamente.
+            <span class="text-center">
+                <br>Puedes volver a <a href="{% url 'login' %}">Iniciar sesión.</a>
+            </span>
+        </p>
+    </div>
+{% endblock %}

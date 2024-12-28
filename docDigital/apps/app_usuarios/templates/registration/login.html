@@ -32,7 +32,9 @@
                 <button type="submit">Iniciar Sesión</button>
             </div>
         </form>
-        <p class="text-center mt-3">¿Olvidaste tu contraseña? <a href="#">Recuperala aquí.</a></p>
+        <p class="text-center mt-3">
+            ¿Olvidaste tu contraseña? <a href="{% url 'password_reset' %}">Recuperala aquí.</a>
+        </p>
         <div id="message" class="hidden"></div>
     </div>
 {% endblock %}
