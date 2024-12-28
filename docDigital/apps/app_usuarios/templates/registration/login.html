@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+    <div class="contact-container shadow">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        {% if form.errors %}
+            <p class="text-center mt-2">
+                Tu nombre de usuario o contraseña no son iguales.
+                Intentalo de nuevo.
+            </p>
+        {% else %}
+            <p class="text-center mt-2">Inicia sesión para acceder a la aplicación.</p>
+        {% endif %}
+        <form id="contact-form" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input-container">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.errors %}
+                        <ul class="errorList">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="button-container">
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+        </form>
+        <p class="text-center mt-3">¿Olvidaste tu contraseña? <a href="#">Recuperala aquí.</a></p>
+        <div id="message" class="hidden"></div>
+    </div>
+{% endblock %}
