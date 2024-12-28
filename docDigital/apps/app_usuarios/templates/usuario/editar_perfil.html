@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Editar Perfil</h1>
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6">
+                <form method="post" id="contact-form">
+                    {% for field in formulario_usuario %}
+                        <div class="input-container">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% if field.errors %}
+                                <ul class="errorList">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    {% for field in formulario_perfil %}
+                        <div class="input-container">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% if field.errors %}
+                                <ul class="errorList">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    {% csrf_token %}
+                    <div class="button-container">
+                        <button type="submit">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
