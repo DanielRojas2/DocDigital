@@ -3,4 +3,3 @@ psycopg2==2.9.10
 python-dotenv==1.0.1
 pytest-django==4.9
 django-auditlog==3.0.0
-auditlog
