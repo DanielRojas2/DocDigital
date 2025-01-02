@@ -11,13 +11,13 @@ from .models.ModeloPersonalAgencia import ModeloPersonalAgencia
 class AduanaDespachoAdmin(admin.ModelAdmin):
     list_display = ['aduana_despacho', 'creado']
     search_fields = ['aduana_despacho']
-    date_hierarchy = ['creado']
+    date_hierarchy = 'creado'
 
 @admin.register(ModeloCanalApertura)
 class CanalAperturaAdmin(admin.ModelAdmin):
     list_display = ['tipo_canal', 'creado']
     search_fields = ['tipo_canal']
-    date_hierarchy = ['creado']
+    date_hierarchy = 'creado'
 
 @admin.register(ModeloImportador)
 class ImportadorAdmin(admin.ModelAdmin):
@@ -26,3 +26,18 @@ class ImportadorAdmin(admin.ModelAdmin):
     ]
     list_filter = ['tipo_importador']
     search_fields = ['nombre_importador', 'nit_importador']
+
+@admin.register(ModeloMercaderia)
+class MercaderiaAdmin(admin.ModelAdmin):
+    list_display = ['nombre_mercaderia', 'creado']
+    search_fields = ['nombre_mercaderia']
+
+@admin.register(ModeloModalidadDespacho)
+class ModalidadDespachoAdmin(admin.ModelAdmin):
+    list_display = ['tipo_despacho', 'creado']
+    search_fields = ['tipo_despacho']
+
+@admin.register(ModeloPersonalAgencia)
+class ModeloPersonalAgenciaAdmin(admin.ModelAdmin):
+    list_display = ['nombre_personal', 'apellido_personal', 'telefono_personal']
+    search_fields = ['nombre_personal', 'apellido_personal']
