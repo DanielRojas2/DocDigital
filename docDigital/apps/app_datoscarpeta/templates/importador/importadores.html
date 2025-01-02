@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Importadores{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-4">
+        <h1>Importadores</h1>
+        <div class="table-container">
+            <table class="table table-hover table-rwd">
+                <thead class="table-dark "> 
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Importador</th>
+                        <th scope="col"># NIT</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    {% for importador in importadores %}
+                        <tr>
+                            <td scope="row">{{ importador.id }}</td>
+                            <td>{{ importador.nombre_importador }}</td>
+                            <td>{{ importador.nit_importador }}</td>
+                            <td>{{ importador.tipo_importador }}</td>
+                            <td class="d-flex justify-content-evenly">
+                                <a href="{% url 'editar_importador' importador.id %}"
+                                class="btn btn-primary btn-sm">
+                                    Editar
+                                </a>
+                                <a href="{% url 'eliminar_importador' importador.id %}"
+                                class="btn btn-danger btn-sm" onclick="return confirm(
+                                    '¿Estas seguro de eliminar este importador?'
+                                );">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="form-container">
+            <h2>Registrar Importador</h2>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    {% for field in importador_form %}
+                        {% if field.name != 'tipo_importador' %}
+                            <div class="col-lg-6">
+                                <div class="input-container">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {% if field.errors %}
+                                        <ul class="errorList">
+                                            {% for error in field.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="col-lg-6 mb-3">
+                        <div class="select-container">
+                            {% for field in importador_form %}
+                                {% if field.name == 'tipo_importador' %}
+                                    <div class="row d-flex justify-content-center align-items-center">
+                                        <div class="col-lg-6">
+                                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            {{ field }}
+                                        </div>
+                                        {% if field.errors %}
+                                            <ul class="errorList">
+                                                {% for error in field.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex justify-content-start">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Registrar Importador</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
