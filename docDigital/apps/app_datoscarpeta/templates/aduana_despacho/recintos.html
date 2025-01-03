@@ -5,6 +5,34 @@
 {% block content %}
     <div class="container mt-4">
         <h1>Recintos Aduaneros</h1>
+        <div class="form-container">
+            <h2>Registrar Recinto</h2>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-8">
+                        {% for field in aduana_despacho_form %}
+                            <div class="input-container">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.errors %}
+                                    <ul class="errorList">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-4">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Registrar Recinto</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="table-container">
             <table class="table table-hover table-rwd">
                 <thead class="table-dark "> 
@@ -36,31 +64,5 @@
                 </tbody>
             </table>
         </div>
-        <form method="post" id="contact-form">
-            <div class="row d-flex align-items-center">
-                <div class="col-lg-8">
-                    {% for field in aduana_despacho_form %}
-                        <div class="input-container">
-                            {{ field }}
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {% if field.errors %}
-                                <ul class="errorList">
-                                    {% for error in field.errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="col-lg-4">
-                    {% csrf_token %}
-                    <div class="button-container">
-                        <button type="submit">Registrar Recinto</button>
-                    </div>
-                </div>
-            </div>
-            
-        </form>
     </div>
 {% endblock %}

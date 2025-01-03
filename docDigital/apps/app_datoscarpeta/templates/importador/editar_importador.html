@@ -4,25 +4,58 @@
 
 {% block content %}
     <div class="container mt-4">
-        <h1>Editar Importador</h1>
-        <form method="post" id="contact-form">
-            {% for field in editar_importador_form %}
-                <div class="input-container">
-                    {{ field }}
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {% if field.errors %}
-                        <ul class="errorList">
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
+        <div class="form-container">
+            <h1>Editar Importador</h1>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    {% for field in editar_importador_form %}
+                        {% if field.name != 'tipo_importador' %}
+                            <div class="col-lg-6">
+                                <div class="input-container">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {% if field.errors %}
+                                        <ul class="errorList">
+                                            {% for error in field.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="col-lg-6 mb-2">
+                        <div class="select-container">
+                            {% for field in editar_importador_form %}
+                                {% if field.name == 'tipo_importador' %}
+                                    <div class="row d-flex justify-content-center align-items-center">
+                                        <div class="col-lg-6">
+                                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            {{ field }}
+                                        </div>
+                                        {% if field.errors %}
+                                            <ul class="errorList">
+                                                {% for error in field.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
-                        </ul>
-                    {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-2 d-flex justify-content-start align-items-center">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Editar Importador</button>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-            {% csrf_token %}
-            <div class="button-container">
-                <button type="submit">Editar Importador</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 {% endblock %}
