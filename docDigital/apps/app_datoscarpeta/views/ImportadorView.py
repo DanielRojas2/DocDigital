@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from ..models.ModeloImportador import ModeloImportador
 from ..forms.ImportadorForm import ImportadorForm
 
 @login_required
 def listar_importador(request):
-    importadores = ModeloImportador.objects.all()[:5]
+    lista_importadores = ModeloImportador.objects.all()
+
+    paginator = Paginator(lista_importadores, 5)
+    page_number = request.GET.get('page',1)
+    
     if request.method == 'POST':
         importador_form = ImportadorForm(request.POST)
         if importador_form.is_valid():
@@ -14,6 +19,14 @@ def listar_importador(request):
             return redirect("importadores")
     else:
         importador_form = ImportadorForm()
+    
+    try:
+        importadores = paginator.page(page_number)
+    except PageNotAnInteger:
+        importadores = paginator.page(1)
+    except EmptyPage:
+        importadores = paginator.page(paginator.num_pages)
+    
     return render(
         request, 'importador/importadores.html',
         {
@@ -25,6 +38,7 @@ def listar_importador(request):
 @login_required
 def editar_importador(request, pk):
     importador = get_object_or_404(ModeloImportador, pk=pk)
+    
     if request.method == 'POST':
         editar_importador_form = ImportadorForm(
             request.POST, instance=importador
@@ -34,6 +48,7 @@ def editar_importador(request, pk):
             return redirect("importadores")
     else:
         editar_importador_form = ImportadorForm(instance=importador)
+    
     return render(
         request, 'importador/editar_importador.html',
         {

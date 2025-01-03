@@ -34,6 +34,10 @@ class ModeloImportador(models.Model):
     class Meta:
         verbose_name = 'Importador'
         verbose_name_plural = 'Importadores'
+        ordering = ['creado']
+        indexes = [
+            models.Index(fields=['creado'])
+        ]
 
     def clean(self):
         self.tipo_importador = escape(self.tipo_importador)
