@@ -14,6 +14,10 @@ class ModeloMercaderia(models.Model):
     class Meta:
         verbose_name = 'Mercadería'
         verbose_name_plural = 'Mercadería'
+        ordering = ['creado']
+        indexes = [
+            models.Index(fields=['creado'])
+        ]
 
     def __str__(self):
         return f"{self.nombre_mercaderia}"
