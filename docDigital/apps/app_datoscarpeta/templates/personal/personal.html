@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Agencia{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-4">
+        <h1>Personal</h1>
+        <div class="form-container">
+            <h2>Registrar Personal</h2>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-8">
+                        {% for field in personal_agencia_form %}
+                            <div class="input-container">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.errors %}
+                                    <ul class="errorList">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-4">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Registrar Personal</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="table-container">
+            <table class="table table-hover table-rwd">
+                <thead class="table-dark "> 
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    {% for personal in personal %}
+                        <tr>
+                            <td scope="row">{{ personal.id }}</td>
+                            <td>{{ personal.nombre_personal }}</td>
+                            <td>{{ personal.apellido_personal }}</td>
+                            <td>{{ personal.telefono_personal }}</td>
+                            <td>
+                                <a href="{% url 'editar_personal' personal.id %}"
+                                class="btn btn-primary btn-sm">
+                                    Editar
+                                </a>
+                                <a href="{% url 'eliminar_personal' personal.id %}"
+                                class="btn btn-danger btn-sm" onclick="return confirm(
+                                    '¿Estas seguro de eliminar este Personal?'
+                                );">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "pagination.html" with page=personal %}
+        </div>
+    </div>
+{% endblock %}

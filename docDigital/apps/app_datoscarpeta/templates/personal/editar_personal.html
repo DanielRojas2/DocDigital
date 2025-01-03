@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Agencia{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1>Personal</h1>
+        <div class="form-container">
+            <h2>Editar Personal</h2>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-8">
+                        {% for field in editar_personal_agencia_form %}
+                            <div class="input-container">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.errors %}
+                                    <ul class="errorList">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-4">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Editar Personal</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

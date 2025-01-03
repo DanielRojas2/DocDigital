@@ -9,6 +9,9 @@ from .views.ImportadorView import (
 from .views.MercaderiaView import (
     mercaderia, editar_mercaderia, eliminar_mercaderia
 )
+from .views.PersonalAgenciaView import (
+    personal_agencia, editar_personal_agencia, eliminar_personal_agencia
+)
 
 urlpatterns = [
     path('recintos_aduaneros/', lista_aduana_despacho, name='recintos_aduaneros'),
@@ -20,4 +23,7 @@ urlpatterns = [
     path('mercaderia/', mercaderia, name='mercaderia'),
     path('editar_mercaderia/<int:pk>/', editar_mercaderia, name='editar_mercaderia'),
     path('eliminar_mercaderia/<int:pk>/', eliminar_mercaderia, name='eliminar_mercaderia'),
+    path('personal_agencia/', personal_agencia, name='personal_agencia'),
+    path('editar_personal/<int:pk>/', editar_personal_agencia, name='editar_personal'),
+    path('eliminar_personal/<int:pk>/', eliminar_personal_agencia, name='eliminar_personal'),
 ]
