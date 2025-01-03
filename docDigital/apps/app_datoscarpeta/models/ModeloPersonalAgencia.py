@@ -28,6 +28,11 @@ class ModeloPersonalAgencia(models.Model):
             )
         ]
 
+        ordering = ['creado']
+        indexes = [
+            models.Index(fields=['creado'])
+        ]
+
     def __str__(self):
         return f"{self.nombre_personal} {self.apellido_personal}"
 
