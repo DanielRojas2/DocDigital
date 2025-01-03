@@ -11,7 +11,7 @@ class ModeloPersonalAgencia(models.Model):
         max_length=25, blank=False, null=False
     )
     telefono_personal = models.CharField(
-        max_length=8, blank=False, null=False
+        max_length=8, blank=True, null=True
     )
 
     creado = models.DateTimeField(auto_now_add=True)
@@ -20,6 +20,13 @@ class ModeloPersonalAgencia(models.Model):
     class Meta:
         verbose_name = 'Personal'
         verbose_name_plural = 'Personal Agencia'
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=['nombre_personal', 'apellido_personal'],
+                name='unique_nombre_apellido'
+            )
+        ]
 
     def __str__(self):
         return f"{self.nombre_personal} {self.apellido_personal}"
