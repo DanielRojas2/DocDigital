@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Mercaderia{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="form-container">
+            <h2>Editar Mercaderia</h2>
+            <form method="post" id="contact-form">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-8">
+                        {% for field in editar_mercaderia_form %}
+                            <div class="input-container">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.errors %}
+                                    <ul class="errorList">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-4">
+                        {% csrf_token %}
+                        <div class="button-container">
+                            <button type="submit">Editar Mercaderia</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -8,6 +8,7 @@ class ModeloMercaderia(models.Model):
     nombre_mercaderia = models.CharField(
         max_length=75, blank=False, null=False, unique=True
     )
+
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
 
